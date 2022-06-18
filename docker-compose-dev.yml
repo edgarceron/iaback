@@ -1,0 +1,16 @@
+services:
+  db:
+    container_name: dbia
+    image: postgres
+    restart: unless-stopped
+    environment:
+        POSTGRES_USER: iaback
+        POSTGRES_PASSWORD: iaback
+        POSTGRES_DB: iaback
+    # volumes:
+    #   - /var/lib/postgresql/data/
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U iaback"]
+      interval: 5s
+    ports:
+      - 5432:5432

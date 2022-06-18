@@ -1,0 +1,31 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "2.0.0",
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "development",
+            "name": "django",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/manage.py",
+            "python": "${workspaceFolder}/env/bin/python",
+            "args": [
+                "runserver"
+            ],
+            "django": true,
+            "windows": {
+                "program": "${workspaceFolder}\\manage.py",
+                "python": "${workspaceFolder}\\env\\Scripts\\python.exe",
+            }
+        }
+    ],
+    "compounds": [
+        {
+          "name": "Server/Client",
+          "configurations": ["django"]
+        }
+    ]
+}
