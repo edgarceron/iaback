@@ -26,3 +26,4 @@ class PracticeConsumer(AsyncConsumer):
     async def websocket_disconnect(self, event):
         # when websocket disconnects
         print("disconnected", event)
+    
