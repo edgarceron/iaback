@@ -7,7 +7,7 @@
         {
             "cwd": "${workspaceFolder}",
             "preLaunchTask": "development",
-            "name": "django",
+            "name": "iaback",
             "type": "python",
             "request": "launch",
             "program": "${workspaceFolder}/manage.py",
@@ -20,12 +20,19 @@
                 "program": "${workspaceFolder}\\manage.py",
                 "python": "${workspaceFolder}\\env\\Scripts\\python.exe",
             }
+        },
+        {
+            "type": "node-terminal",
+            "name": "iafront",
+            "request": "launch",
+            "command": "npm run start",
+            "cwd": "${userHome}/iafront"
         }
     ],
     "compounds": [
         {
           "name": "Server/Client",
-          "configurations": ["django"]
+          "configurations": ["iafront", "iaback"]
         }
     ]
 }

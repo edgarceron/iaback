@@ -1,29 +1,23 @@
 import asyncio
 from channels.consumer import AsyncConsumer
+from channels.generic.websocket import WebsocketConsumer
 
+import json
 
-class PracticeConsumer(AsyncConsumer):
-    async def websocket_connect(self,event):
-        # when websocket connects
-        print("connected",event)
+class PracticeConsumer(WebsocketConsumer):
+    def connect(self):
+        print('Connected')
+        self.accept()
 
-        await self.send({
-            "type": "websocket.accept",
-        })
-        await self.send({
-            "type":"websocket.send",
-            "text":0
-        })
-    
-    async def websocket_receive(self,event):
-        # when messages is received from websocket
-        print("receive",event)
-        await self.send({
-            "type": "websocket.send",
-            "text": ""
-        })
-    
-    async def websocket_disconnect(self, event):
-        # when websocket disconnects
-        print("disconnected", event)
-    
+    def disconnect(self, close_code):
+        print('Disconnected')
+        pass
+
+    def receive(self, text_data):
+        print(text_data)
+        text_data_json = json.loads(text_data)
+        message = text_data_json['message']
+
+        self.send(text_data=json.dumps({
+            'message': message
+        }))

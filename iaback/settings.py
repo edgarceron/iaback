@@ -9,13 +9,14 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import os, environ
-from pathlib import Path
+import environ
+import os
 
-env = environ.Env()
-environ.Env.read_env()
+env = environ.Env(DEBUG=(bool, False))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+environ.Env.read_env(os.path.join(BASE_DIR, '.env'), overwrite=True)
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
@@ -27,7 +28,12 @@ SECRET_KEY = 'django-insecure-wy4%r7522rx(4s$vwm$h3*^e85=@f&)he3^@v5q5f(w9(nb+yd
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    'localhost:3000',
+    'http://127.0.0.1:3000/',
+    'localhost:*',
+    'localhost'
+]
 
 
 # Application definition
@@ -55,7 +61,7 @@ MIDDLEWARE = [
 
 
 ROOT_URLCONF = 'iaback.urls'
-ASGI_APPLICATION = "magicia.routing.application"
+ASGI_APPLICATION = "iaback.asgi.application"
 
 TEMPLATES = [
     {
@@ -78,7 +84,6 @@ WSGI_APPLICATION = 'iaback.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql_psycopg2",
